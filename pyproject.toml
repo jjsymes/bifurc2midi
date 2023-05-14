@@ -1,0 +1,41 @@
+[project]
+name = "bifurc2midi"
+version = "0.0.1"
+description = "This application generates midi bifurcation diagrams generated from generated logistic map data."
+readme = "README.md"
+authors = [
+    {name = "Josh"}
+]
+dependencies = [
+    "numpy",
+    "matplotlib",
+    "mido",
+    "click"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "coverage",
+    "flake8",
+    "black",
+    "isort",
+    "mypy",
+    "pre-commit",
+]
+
+[project.scripts]
+bifurc2midi = "bifurc2midi.__main__:main"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.coverage.run]
+source = ["bifurc2midi"]
+
+[tool.pytest.ini_options]
+addopts = "--cov --cov-report html"
+
+[tool.pylint]
+max-line-length = 88
