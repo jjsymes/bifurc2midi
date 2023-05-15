@@ -1,9 +1,8 @@
-from bifurc2midi.example import hello
+from bifurc2midi.cli import cli
 
 
 def main():
-    msg = hello("World")
-    print(msg)
+    cli()
 
 
 if __name__ == "__main__":

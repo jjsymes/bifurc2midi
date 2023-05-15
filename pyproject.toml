@@ -10,17 +10,20 @@ dependencies = [
     "numpy",
     "matplotlib",
     "mido",
-    "click"
+    "click",
+    "python-rtmidi"
 ]
 
 [project.optional-dependencies]
 test = [
     "pytest",
+    "pytest-cov",
     "coverage",
     "flake8",
     "black",
     "isort",
     "mypy",
+    "types-setuptools",
     "pre-commit",
 ]
 
@@ -35,7 +38,7 @@ build-backend = "setuptools.build_meta"
 source = ["bifurc2midi"]
 
 [tool.pytest.ini_options]
-addopts = "--cov --cov-report html"
+addopts = "--cov bifurc2midi --cov-report term-missing --cov-report xml --cov-report html --cov-branch"
 
 [tool.pylint]
-max-line-length = 88
+max-line-length = 120

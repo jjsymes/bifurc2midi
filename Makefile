@@ -8,13 +8,13 @@ help: ## Show the help.
 	@echo "Usage: make [target] [EXTRA_ARGS=...]"
 	@echo ""
 	@echo "Targets:"
-	@fgrep "##" Makefile | fgrep -v fgrep
+	@fgrep "##" Makefile | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
 .PHONY: show
 show: ## Show the environment.
 	@echo "Current environment:"
 	@echo "Running using $(ENV_PREFIX)"
-	@$(ENV_PREFIX)python -v
+	@$(ENV_PREFIX)python --version
 	@$(ENV_PREFIX)python -m bifurc2midi --version
 
 .PHONY: install
@@ -25,19 +25,19 @@ install: activate ## Install the in dev mode
 .PHONY: fmt
 fmt: activate ## Format code using black and isort
 	$(ENV_PREFIX)isort bifurc2midi/
-	$(ENV_PREFIX)black -l 88 bifurc2midi/
-	$(ENV_PREFIX)black -l 88 tests/
+	$(ENV_PREFIX)black bifurc2midi/
+	$(ENV_PREFIX)black tests/
 
 .PHONY: lint
 lint: activate ## Run pep8, black, mypy linters
 	$(ENV_PREFIX)flake8 bifurc2midi/
-	$(ENV_PREFIX)black -l 88 --check bifurc2midi/
-	$(ENV_PREFIX)black -l 88 --check tests/
+	$(ENV_PREFIX)black --check bifurc2midi/
+	$(ENV_PREFIX)black --check tests/
 	$(ENV_PREFIX)mypy --ignore-missing-imports bifurc2midi/
 
 .PHONY: test
 test: activate ## Run tests
-	$(ENV_PREFIX)pytest -v --cov bifurc2midi -l --tb=short --maxfail=1 tests/
+	$(ENV_PREFIX)pytest -v -l --tb=short --maxfail=1 tests/
 	$(ENV_PREFIX)coverage xml
 	$(ENV_PREFIX)coverage html
 
@@ -58,10 +58,9 @@ clean: ## Clean unused files
 	@rm -rf dist
 	@rm -rf *.egg-info
 	@rm -rf htmlcov
-	@rm -rf tox/
 
 .PHONY: virtualenv
-virtualenv: ## Create a virtual environment.
+virtualenv: ## Create a virtual environment
 	@echo "Creating virtualenv..."
 	@rm -rf .venv
 	@$(PYTHON_COMMAND) -m venv .venv
@@ -71,7 +70,7 @@ virtualenv: ## Create a virtual environment.
 	@echo "!!! Please run 'source .venv/bin/activate' to activate the virtualenv !!!"
 
 .PHONY: activate
-activate: ## Activate the virtual environment.
+activate: ## Activate the virtual environment
 	@echo "Activating virtualenv..."
 	. ./$(ENV_PREFIX)activate
 
@@ -100,6 +99,10 @@ pre-commit-install: activate ## Install pre-commit hooks
 .PHONY: pre-commit-uninstall
 pre-commit-uninstall: activate ## Uninstall pre-commit hooks
 	pre-commit uninstall
+
+.PHONY: pre-commit-run
+pre-commit-run: activate ## Run pre-commit hooks
+	pre-commit run --all-files
 
 .PHONY: variables
 variables: ## Show interesting variables
