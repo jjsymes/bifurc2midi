@@ -34,17 +34,21 @@ from bifurc2midi.midi import (
     help="Number of iterations to discard at the start of each r value",
 )
 @click.option(
-    "--x-value-initial-behaviour",
+    "--x-initial-value-behaviour",
     type=LogisticMapInitialXValueBehaviour,
     default=LogisticMapInitialXValueBehaviour.STATIC,
-    help="Initial x value for the logistic map",
+    help="Initial x value for each logistic map. Defaults to static randomly generated value.",
 )
 @click.option("-o", "--out", type=str, default="out.mid", help="Output midi file name")
 @click.option(
     "-p", "--plot-diagram", is_flag=True, help="Plot the logistic map data on a diagram"
 )
 @click.option(
-    "-m", "--midi-out-device", type=str, default=None, help="Midi output device name"
+    "-d",
+    "--midi-out-device",
+    type=str,
+    default=None,
+    help="Midi output device name. Use 'default' to use the first available device.",
 )
 def cli(
     r_start: float,
@@ -52,7 +56,7 @@ def cli(
     r_step_size: float,
     number_of_iterations_per_r_value: int,
     burn_in: int,
-    x_value_initial_behaviour: LogisticMapInitialXValueBehaviour,
+    x_initial_value_behaviour: LogisticMapInitialXValueBehaviour,
     out: str,
     plot_diagram: bool,
     midi_out_device: str,
@@ -63,7 +67,7 @@ def cli(
     r_step_size = r_step_size
     number_of_iterations_per_r_value = number_of_iterations_per_r_value
     burn_in = burn_in
-    x_value_initial_behaviour = x_value_initial_behaviour
+    x_initial_value_behaviour = x_initial_value_behaviour
     midi_out_filename = out
     plot_diagram = plot_diagram
     midi_out_device = midi_out_device
@@ -78,7 +82,7 @@ def cli(
         f"\tr step size: {r_step_size}\n"
         f"\tNumber of iterations per r value: {number_of_iterations_per_r_value}\n"
         f"\tBurn in: {burn_in}\n"
-        f"\tx initial value behaviour: {x_value_initial_behaviour}\n"
+        f"\tx value initial behaviour: {x_initial_value_behaviour}\n"
         f"\tMidi out filename: {midi_out_filename}\n"
         f"\tPlot diagram: {plot_diagram}\n"
         f"\tMidi out device: {midi_out_device}\n"
@@ -89,7 +93,7 @@ def cli(
         r_interval[1],
         r_step_size,
         number_of_iterations_per_r_value,
-        x_initial_behaviour=x_value_initial_behaviour,
+        x_initial_behaviour=x_initial_value_behaviour,
         burn_in=burn_in,
     )
 
