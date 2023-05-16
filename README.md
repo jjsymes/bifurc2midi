@@ -112,6 +112,7 @@ make lint
 - Add support for sustain pedal
 - Investigate improving blending of note transitions/overlaps
 - Add tests, replace the placeholder test
+- Run tests in github actions
 - Release as a package
 - Installation shell script
 - Add support to specify the starting note
