@@ -9,7 +9,7 @@
 
 ### Download the source code
 
-#### Option 1: Clone the repository using git
+#### Option 1: Clone the repository using git (recommended)
 
 - Pre-requisites:
     - git: This is a version control system. It can be installed by going to the App Store and installing Xcode.
@@ -22,6 +22,12 @@ git clone https://github.com/jjsymes/bifurc2midi.git
 3. Navigate to the newly created `bifurc2midi` directory:
 ```bash
 cd bifurc2midi
+```
+
+**note**
+The advantage of using git to clone the repository is that you can easily update the source code to the latest version by running the following command:
+```bash
+git pull
 ```
 
 #### Option 2: Download the source code as a zip file
