@@ -2,9 +2,7 @@
 
 This application generates midi bifurcation diagrams generated from generated logistic map data.
 
-## Installation
-
-See [more detailed instructions for installation on macOS](docs/MACOS.md) for details.
+See [instructions for installation on macOS](docs/MACOS.md) for more detailed guide on getting started.
 
 ## Installation
 
