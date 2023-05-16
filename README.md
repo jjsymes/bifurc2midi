@@ -2,9 +2,7 @@
 
 This application generates midi bifurcation diagrams generated from generated logistic map data.
 
-## Installation
-
-See [more detailed instructions for installation on macOS](docs/MACOS.md) for details.
+See [instructions for installation on macOS](docs/MACOS.md) for more detailed guide on getting started.
 
 ## Installation
 
@@ -112,6 +110,7 @@ make lint
 - Add support for sustain pedal
 - Investigate improving blending of note transitions/overlaps
 - Add tests, replace the placeholder test
+- Run tests in github actions
 - Release as a package
 - Installation shell script
 - Add support to specify the starting note
