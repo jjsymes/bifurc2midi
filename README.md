@@ -107,10 +107,10 @@ make lint
 
 ## TODO
 
-- Add support for sustain pedal
 - Investigate improving blending of note transitions/overlaps
 - Add tests, replace the placeholder test
 - Run tests in github actions
 - Release as a package
+- Review what is settings/parameters are configurable
 - Installation shell script
 - Add support to specify the starting note
