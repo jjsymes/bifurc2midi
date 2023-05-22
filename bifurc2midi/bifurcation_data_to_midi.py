@@ -11,6 +11,7 @@ def bifurcation_data_to_midi(
     arpeggiate: bool = True,
     note_value: NoteValue = NoteValue.SIXTEENTH,
     note_blend: float = 0.0,
+    pedal_on: bool = True,
 ) -> MidiFile:
     number_of_pitch_levels = 88
     bpm = 120
@@ -43,6 +44,10 @@ def bifurcation_data_to_midi(
             "time_signature", numerator=time_signature[0], denominator=time_signature[1]
         )
     )
+
+    if pedal_on:
+        pedal_on_msg=Message("control_change", control=64, value=127, time=0)
+        track.append(pedal_on_msg)
 
     for i, _ in enumerate(bifurcation_data.x_values):
         if note_blend == 0.0:
