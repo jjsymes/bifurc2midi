@@ -82,8 +82,8 @@ run: ## Run the project
 build: ## Build the project
 	$(ENV_PREFIX)python -m build
 
-.PHONY: release
-release: ## Create a new tag for a release
+.PHONY: tag
+tag: ## Create a new tag for a release
 	@echo "WARNING: This operation will create a new tag and push it to the remote repository."
 	@read -p "Version? (e.g. 0.1.0): " TAG && \
 	sed -i "" "s/version = \"[0-9]\.[0-9]\.[0-9]\"/version = \"$${TAG}\"/g" pyproject.toml && \
@@ -93,8 +93,8 @@ release: ## Create a new tag for a release
 	git tag $${TAG} && \
 	git push -u origin HEAD --tags
 
-.PHONY: release-package
-release-package: build ## push the package to pypi
+.PHONY: release
+release: build ## push the package to pypi
 	$(ENV_PREFIX)python -m twine upload dist/*
 
 .PHONY: pre-commit-install
