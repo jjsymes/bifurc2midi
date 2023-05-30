@@ -85,12 +85,16 @@ build: ## Build the project
 .PHONY: release
 release: ## Create a new tag for a release
 	@echo "WARNING: This operation will create a new tag and push it to the remote repository."
-	@read -p "Version? (e.g. 0.1.0): " TAG
-	@echo "$${TAG}" > bifurc2midi/VERSION
-	@git commit -m "release: version $${TAG}"
-	@echo "creating git tag : $${TAG}"
-	@git tag $${TAG}
-	@git push -u origin HEAD --tags
+	@read -p "Version? (e.g. 0.1.0): " TAG && \
+	sed -i "" "s/version = \"[0-9]\.[0-9]\.[0-9]\"/version = \"$${TAG}\"/g" pyproject.toml && \
+	git commit -m "release: version $${TAG}" && \
+	echo "creating git tag : $${TAG}" && \
+	git tag $${TAG} && \
+	git push -u origin HEAD --tags
+
+.PHONY: release-package
+release-package: build ## push the package to pypi
+	$(ENV_PREFIX)python -m twine upload dist/*
 
 .PHONY: pre-commit-install
 pre-commit-install: activate ## Install pre-commit hooks
