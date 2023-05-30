@@ -87,6 +87,7 @@ release: ## Create a new tag for a release
 	@echo "WARNING: This operation will create a new tag and push it to the remote repository."
 	@read -p "Version? (e.g. 0.1.0): " TAG && \
 	sed -i "" "s/version = \"[0-9]\.[0-9]\.[0-9]\"/version = \"$${TAG}\"/g" pyproject.toml && \
+	git add pyproject.toml && \
 	git commit -m "release: version $${TAG}" && \
 	echo "creating git tag : $${TAG}" && \
 	git tag $${TAG} && \
