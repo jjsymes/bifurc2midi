@@ -6,24 +6,11 @@ See [instructions for installation on macOS](docs/MACOS.md) for more detailed gu
 
 ## Installation
 
-- Prerequisites:
-    - Python 3
-    - pip
-
-Make sure pip is up to date:
+- Install from PyPI:
 ```bash
-python3 -m pip install --upgrade pip
+pip3 install bifurc2midi
 ```
 
-- Install package from source code:
-```bash
-pip install .
-```
-
-- Now you can run the application from the command line e.g.
-```bash
-bifurc2midi --version
-```
 ## Usage
 
 - For help:
@@ -56,6 +43,27 @@ bifurc2midi --midi-out-device 'device_name'
     4. Check 'Device is online' checkbox
     5. Click 'Apply'
     6. Make sure 'IAC Driver' enabled as a midi input device in your DAW
+
+## Installation from source
+
+- Prerequisites:
+    - Python 3
+    - pip
+
+Make sure pip is up to date:
+```bash
+python3 -m pip install --upgrade pip
+```
+
+- Install package from source code:
+```bash
+pip install .
+```
+
+- Now you can run the application from the command line e.g.
+```bash
+bifurc2midi --version
+```
 
 ## Development
 
@@ -109,10 +117,7 @@ make lint
 
 - Investigate improving blending of note transitions/overlaps
 - Add tests, replace the placeholder test
-- Run tests in github actions
-- Release as a package
-- Review what is settings/parameters are configurable
-- Installation shell script
+- Release executable hosted on github
 - Add support to specify the starting note
 - GUI
 - Realtime parameter tweaking as it sends midi to output

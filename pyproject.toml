@@ -4,7 +4,7 @@ version = "0.0.1"
 description = "This application generates midi bifurcation diagrams generated from generated logistic map data."
 readme = "README.md"
 authors = [
-    {name = "Josh"}
+    {name = "Josh Symes"}
 ]
 dependencies = [
     "numpy",
@@ -38,6 +38,9 @@ bifurc2midi = "bifurc2midi.__main__:main"
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+exclude = ["docs*", "tests*"]
 
 [tool.coverage.run]
 source = ["bifurc2midi"]
