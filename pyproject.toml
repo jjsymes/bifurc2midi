@@ -1,6 +1,6 @@
 [project]
 name = "bifurc2midi"
-version = "0.0.0"
+version = "0.0.1"
 description = "This application generates midi bifurcation diagrams generated from generated logistic map data."
 readme = "README.md"
 authors = [
