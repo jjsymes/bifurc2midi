@@ -80,7 +80,7 @@ run: ## Run the project
 
 .PHONY: build
 build: ## Build the project
-	$(ENV_PREFIX)pip install .
+	$(ENV_PREFIX)python -m build
 
 .PHONY: release
 release: ## Create a new tag for a release

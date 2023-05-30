@@ -13,6 +13,11 @@ dependencies = [
     "click",
     "python-rtmidi"
 ]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
 
 [project.optional-dependencies]
 test = [
