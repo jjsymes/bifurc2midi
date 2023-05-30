@@ -12,26 +12,37 @@ from bifurc2midi.midi import (
     play_midi_file,
     save_midi_file,
 )
+from bifurc2midi.music import NoteValue
 
 
 @click.version_option()
 @click.command()
-@click.option("--r-start", type=float, default=2.9, help="Start of r interval range")
-@click.option("--r-end", type=float, default=4, help="End of r interval range")
 @click.option(
-    "--r-step-size", type=float, default=0.001, help="Step size of r interval range"
+    "--r-start",
+    type=float,
+    default=2.9,
+    help="Start of r interval range. Defaults to 2.9",
+)
+@click.option(
+    "--r-end", type=float, default=4, help="End of r interval range. Defaults to 4"
+)
+@click.option(
+    "--r-step-size",
+    type=float,
+    default=0.001,
+    help="Step size of r interval range. Defaults to 0.001",
 )
 @click.option(
     "--number-of-iterations-per-r-value",
     type=int,
     default=1000,
-    help="Number of iterations of the logistic map per r value",
+    help="Number of iterations of the logistic map per r value. Defaults to 1000",
 )
 @click.option(
     "--burn-in",
     type=int,
     default=990,
-    help="Number of iterations to discard at the start of each r value",
+    help="Number of iterations to discard at the start of each r value. Defaults to 990",
 )
 @click.option(
     "--x-initial-value-behaviour",
@@ -50,6 +61,30 @@ from bifurc2midi.midi import (
     default=None,
     help="Midi output device name. Use 'default' to use the first available device.",
 )
+@click.option(
+    "--arpeggiate",
+    type=bool,
+    default=True,
+    help="Arpeggiate the notes in the midi output. Defaults to True.",
+)
+@click.option(
+    "--pedal-on",
+    type=bool,
+    default=True,
+    help="Hold the sustain pedal. Defaults to True.",
+)
+@click.option(
+    "--bpm",
+    type=int,
+    default=120,
+    help="Beats per minute. Defaults to 120.",
+)
+@click.option(
+    "--note-value",
+    type=NoteValue,
+    default=NoteValue.SIXTEENTH,
+    help="Note value. Defaults to sixteenth.",
+)
 def cli(
     r_start: float,
     r_end: float,
@@ -60,6 +95,10 @@ def cli(
     out: str,
     plot_diagram: bool,
     midi_out_device: str,
+    arpeggiate: bool,
+    pedal_on: bool,
+    bpm: int,
+    note_value: NoteValue,
 ):
     """An application that generates midi from generated logistic map bifurcation data."""
 
@@ -86,6 +125,10 @@ def cli(
         f"\tMidi out filename: {midi_out_filename}\n"
         f"\tPlot diagram: {plot_diagram}\n"
         f"\tMidi out device: {midi_out_device}\n"
+        f"\tArpeggiate: {arpeggiate}\n"
+        f"\tPedal on: {pedal_on}\n"
+        f"\tBPM: {bpm}\n"
+        f"\tNote value: {note_value.name.title()}\n"
     )
 
     bifurcation_data = BifurcationData.from_data_generation_parameters(
@@ -97,10 +140,13 @@ def cli(
         burn_in=burn_in,
     )
 
-    midi = bifurcation_data_to_midi(bifurcation_data)
+    midi = bifurcation_data_to_midi(
+        bifurcation_data, arpeggiate, pedal_on, bpm, note_value
+    )
 
     if out:
         save_midi_file(midi, out)
+        click.echo("Saved midi file to: " + out)
 
     if midi_out_device:
         if (

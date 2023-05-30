@@ -9,14 +9,13 @@ from bifurc2midi.music import NoteValue
 def bifurcation_data_to_midi(
     bifurcation_data: BifurcationData,
     arpeggiate: bool = True,
+    pedal_on: bool = True,
+    bpm: int = 120,
     note_value: NoteValue = NoteValue.SIXTEENTH,
     note_blend: float = 0.0,
-    pedal_on: bool = True,
 ) -> MidiFile:
     number_of_pitch_levels = 88
-    bpm = 120
     ticks_per_beat = 960
-    time_signature = (4, 4)
     tempo = bpm2tempo(bpm)
 
     bifurcation_data.transform_x_values(lambda x: x * number_of_pitch_levels)
@@ -39,14 +38,9 @@ def bifurcation_data_to_midi(
     mid.tracks.append(track)
 
     track.append(MetaMessage("set_tempo", tempo=tempo))
-    track.append(
-        MetaMessage(
-            "time_signature", numerator=time_signature[0], denominator=time_signature[1]
-        )
-    )
 
     if pedal_on:
-        pedal_on_msg=Message("control_change", control=64, value=127, time=0)
+        pedal_on_msg = Message("control_change", control=64, value=127, time=0)
         track.append(pedal_on_msg)
 
     for i, _ in enumerate(bifurcation_data.x_values):

@@ -114,3 +114,5 @@ make lint
 - Review what is settings/parameters are configurable
 - Installation shell script
 - Add support to specify the starting note
+- GUI
+- Realtime parameter tweaking as it sends midi to output
