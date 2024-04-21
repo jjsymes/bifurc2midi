@@ -121,3 +121,5 @@ make lint
 - Add support to specify the starting note
 - GUI
 - Realtime parameter tweaking as it sends midi to output
+- ASCII art for cli
+- An executable GUI app that acts as a wrapper for the cli app

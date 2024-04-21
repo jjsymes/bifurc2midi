@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class NoteValue(Enum):
-    WHOLE = 1
+    WHOLE = 1.0
     HALF = 1 / 2
     QUARTER = 1 / 4
     EIGHTH = 1 / 8

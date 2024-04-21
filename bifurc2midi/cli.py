@@ -113,7 +113,7 @@ def cli(
 
     package = "bifurc2midi"
     version = pkg_resources.require(package)[0].version
-    click.echo("bifurc2midi v" + version + "\n")
+    click.echo(package + " v" + version + "\n")
 
     click.echo(
         "Running with options:"
@@ -145,8 +145,8 @@ def cli(
     )
 
     if out:
-        save_midi_file(midi, out)
-        click.echo("Saved midi file to: " + out)
+        save_midi_file(midi, midi_out_filename)
+        click.echo("Saved midi file to: " + midi_out_filename)
 
     if midi_out_device:
         if (
