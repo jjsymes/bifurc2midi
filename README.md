@@ -24,6 +24,8 @@ bifurc2midi
 ```
 This will generate a midi file in the current working directory.
 
+`x` from the logistic map is mapped onto the 88 piano keys, MIDI notes 21 (A0) through 108 (C8). By default each distinct pitch in an attractor is played low to high, one note at a time (`--arpeggiate`), and the sustain pedal is held (`--pedal`) so the notes overlap. An arpeggio lasts longer when an attractor has more distinct pitches. `--no-arpeggiate` sounds each attractor's pitches together, and `--no-pedal` turns the pedal off.
+
 - Sending midi output to a specific device:
 
 ```
@@ -116,7 +118,6 @@ make lint
 ## TODO
 
 - Investigate improving blending of note transitions/overlaps
-- Add tests, replace the placeholder test
 - Release executable hosted on github
 - Add support to specify the starting note
 - GUI

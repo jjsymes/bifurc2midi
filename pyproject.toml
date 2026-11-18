@@ -7,7 +7,6 @@ authors = [
     {name = "Josh Symes"}
 ]
 dependencies = [
-    "numpy",
     "matplotlib",
     "mido",
     "click",
@@ -33,7 +32,7 @@ test = [
 ]
 
 [project.scripts]
-bifurc2midi = "bifurc2midi.__main__:main"
+bifurc2midi = "bifurc2midi.adapters.cli:cli"
 
 [build-system]
 requires = ["setuptools"]
@@ -46,7 +45,10 @@ exclude = ["docs*", "tests*"]
 source = ["bifurc2midi"]
 
 [tool.pytest.ini_options]
-addopts = "--cov bifurc2midi --cov-report term-missing --cov-report xml --cov-report html --cov-branch"
+addopts = "--cov bifurc2midi --cov-report term-missing --cov-report xml --cov-report html --cov-branch --cov-fail-under=90"
+
+[tool.isort]
+profile = "black"
 
 [tool.pylint]
 max-line-length = 120

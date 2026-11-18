@@ -1,7 +1,7 @@
-from bifurc2midi.cli import cli
+from bifurc2midi.adapters.cli import cli
 
 
-def main():
+def main() -> None:
     cli()
 
 
